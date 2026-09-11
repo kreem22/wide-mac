@@ -195,3 +195,55 @@ test_native_shell.py::test_timeout PASSED
 ### Phase 3 status
 Backend boundary repaired, filesystem security enforced, all tests pass, `git diff --check` clean, `computer-use-server/` unmodified. Verification complete.
 
+---
+
+## PHASE 3 — GITHUB PUBLISH CHECKPOINT (2026-09-11)
+
+### Actions taken
+- Staged verified Phase 3 source/tests and progress/diagnostic files:
+  - `backend/filesystem.py`
+  - `backend/macos_manager.py`
+  - `backend/manager.py`
+  - `backend/tests/test_fs.py`
+  - `test_native_shell.py`
+  - `OCU.progress.md`
+  - `FULL_DIAG_OCU.md`
+  - `backend/native_filesystem.py` (preserved as-is, not altered)
+- Committed: `Implement and verify native macOS backend Phase 3`
+- Added remote: `https://github.com/kreem22/wide-mac`
+- Pushed `main` to origin.
+
+### Commit hash
+`486fc4d`
+
+### Push result
+```
+branch 'main' set up to track 'origin/main'.
+To https://github.com/kreem22/wide-mac
+ * [new branch]      main -> main
+```
+
+### Remote
+```
+origin	https://github.com/kreem22/wide-mac (fetch)
+origin	https://github.com/kreem22/wide-mac (push)
+```
+
+### Final Git state
+```
+=== git status --short ===
+(empty)
+
+=== git log --oneline -3 ===
+486fc4d Implement and verify native macOS backend Phase 3
+142e889 Implement native macOS filesystem backend
+47c579f Implement native macOS shell backend
+
+=== git remote -v ===
+origin	https://github.com/kreem22/wide-mac (fetch)
+origin	https://github.com/kreem22/wide-mac (push)
+```
+
+### Phase 3 GitHub checkpoint status
+✅ Published. Verified local state preserved on GitHub. Stopping here as instructed.
+
