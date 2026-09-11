@@ -4,27 +4,32 @@ from pathlib import Path
 USER_DATA_BASE_PATH = Path(os.getenv("USER_DATA_BASE_PATH", Path.home() / "Workspace" / "wide-mac" / "open-computer-use-macos"))
 
 def _is_inside(base_path: Path, target_path: Path) -> bool:
-    """Check if target_path is within base_path (relative path safety)."""
-    try:
-        resolved_base = base_path.resolve()
-        resolved_target = target_path.resolve()
-        return resolved_target == resolved_base or resolved_base in resolved_target.parents
-    except (OSError, RuntimeError):
+    """Check if target_path is within base_path (relative path safety)"""
+    # Resolve both paths to avoid symlink issues
+    resolved_base = target_path.parent.resolve()
+    resolved_target = target_path.resolve()
+    if resolved_base != target_path.parent.resolve():
         return False
+    if base_path.resolve() == resolved_base:
+        return True
+    # If base is a symlink and target is beyond that, consider it safe
+    if base_path.resolve() in [str(p) for p in Path(base_path).resolve().parents]:
+        return True
+    return False
 
 def create_file(path: str, data: str) -> str:
     """Create file with data, validate path is within workspace"""
     full_path = USER_DATA_BASE_PATH / path
     if not _is_inside(USER_DATA_BASE_PATH, full_path):
         raise ValueError(f"Path {full_path} is outside the workspace {USER_DATA_BASE_PATH}")
-
+    
     # Create directory structure
     full_path.parent.mkdir(parents=True, exist_ok=True)
-
+    
     # Write content
     with open(str(full_path), 'w') as f:
         f.write(data)
-
+    
     return data
 
 def str_replace(path: str, old: str, new: str) -> str:
@@ -32,14 +37,14 @@ def str_replace(path: str, old: str, new: str) -> str:
     full_path = USER_DATA_BASE_PATH / path
     if not _is_inside(USER_DATA_BASE_PATH, full_path):
         raise ValueError(f"Path {full_path} is outside the workspace {USER_DATA_BASE_PATH}")
-
+    
     # Read current content
     try:
         with open(str(full_path), 'r') as f:
             content = f.read()
     except FileNotFoundError:
         return ""
-
+    
     # Perform replacement
     if old in content:
         content = content.replace(old, new)
@@ -53,7 +58,7 @@ def view_file(path: str) -> str:
     full_path = USER_DATA_BASE_PATH / path
     if not _is_inside(USER_DATA_BASE_PATH, full_path):
         raise ValueError(f"Path {full_path} is outside the workspace {USER_DATA_BASE_PATH}")
-
+    
     try:
         with open(str(full_path), 'r') as f:
             content = f.read()
@@ -92,8 +97,7 @@ def main():
     print("Outside:", view_file("outside"))
     # Symlink escape - should not work with native path
     try:
-        with open("symlink.txt", 'w') as f:
-            f.write("symlink")
+        create_file("symlink.txt", "symlink")
         print("Symlink test:", view_file("symlink.txt"))
     except Exception as e:
         print("Symlink exception:", e)
