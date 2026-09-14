@@ -1,0 +1,137 @@
+╔════════════════════════════════════════════════════════════════════════════════╗
+║              OPEN COMPUTER USE - macOS Native Backend Status                  ║
+║                                                                                ║
+║                         Generated: 2025-02-15                                 ║
+║                         Branch: feature/phase-4a                              ║
+╚════════════════════════════════════════════════════════════════════════════════╝
+
+┌─ CURRENT PHASE ─────────────────────────────────────────────────────────────────┐
+│                                                                                  │
+│  Phase 3: Backend + Filesystem Implementation                                   │
+│                                                                                  │
+│  Status: ❌ BROKEN                                                              │
+│  Blocker: 4 typos in backend/filesystem.py                                      │
+│  Impact: Tests 54% failing (7 fail, 6 pass)                                     │
+│  Fix Time: 10 minutes                                                           │
+│                                                                                  │
+└──────────────────────────────────────────────────────────────────────────────────┘
+
+┌─ THE 4 BUGS ────────────────────────────────────────────────────────────────────┐
+│                                                                                  │
+│  ┌─ Bug #1 (Line 22) ──────────────────────────────────────────────────────┐   │
+│  │ Issue:  exist_ok=False (fails on directory reuse)                      │   │
+│  │ Fix:    exist_ok=True                                                   │   │
+│  │ Impact: test_filesystem_str_replace FAILS                              │   │
+│  └─────────────────────────────────────────────────────────────────────────┘   │
+│                                                                                  │
+│  ┌─ Bug #2 (Line 33) ──────────────────────────────────────────────────────┐   │
+│  │ Issue:  open(full_path.parent) opens DIRECTORY instead of FILE        │   │
+│  │ Fix:    open(full_path)                                                │   │
+│  │ Impact: test_filesystem_str_replace FAILS                              │   │
+│  └─────────────────────────────────────────────────────────────────────────┘   │
+│                                                                                  │
+│  ┌─ Bug #3 (Line 30) ──────────────────────────────────────────────────────┐   │
+│  │ Issue:  Confusing walrus operators in condition                       │   │
+│  │ Fix:    Use normal variable assignment instead                        │   │
+│  │ Impact: test_path_traversal_blocked FAILS                             │   │
+│  └─────────────────────────────────────────────────────────────────────────┘   │
+│                                                                                  │
+│  ┌─ Bug #4 (Line 68) ──────────────────────────────────────────────────────┐   │
+│  │ Issue:  _get_resource_path UNDEFINED (function is get_resource_path)  │   │
+│  │         USER_BASE_PATH UNDEFINED (should be USER_DATA_BASE_PATH)      │   │
+│  │ Fix:    Replace with _is_inside(USER_DATA_BASE_PATH ...)             │   │
+│  │ Impact: ALL 6 test_resource_path_* tests FAIL                         │   │
+│  └─────────────────────────────────────────────────────────────────────────┘   │
+│                                                                                  │
+└──────────────────────────────────────────────────────────────────────────────────┘
+
+┌─ TEST STATUS ───────────────────────────────────────────────────────────────────┐
+│                                                                                  │
+│  PASSING (6/13):  ✅ ✅ ✅ ✅ ✅ ✅                                              │
+│  FAILING (7/13):  ❌ ❌ ❌ ❌ ❌ ❌ ❌                                            │
+│  Failure Rate:    54%                                                           │
+│                                                                                  │
+│  ✅ Backend contract methods exist                                              │
+│  ✅ Execute command (zsh subprocess)                                            │
+│  ✅ Execute command with input                                                  │
+│  ✅ Filesystem create and view                                                  │
+│  ✅ View missing file returns empty                                             │
+│  ✅ Workspace get/set                                                           │
+│                                                                                  │
+│  ❌ Filesystem str_replace (Bug #1, #2)                                         │
+│  ❌ Filesystem str_replace missing (Bug #4)                                     │
+│  ❌ Path traversal blocked (Bug #3)                                             │
+│  ❌ Resource path absolute inside (Bug #4)                                      │
+│  ❌ Resource path absolute outside (Bug #4)                                     │
+│  ❌ Resource path nested (Bug #4)                                               │
+│  ❌ Resource path relative (Bug #4)                                             │
+│                                                                                  │
+└──────────────────────────────────────────────────────────────────────────────────┘
+
+┌─ CODEBASE STRUCTURE ────────────────────────────────────────────────────────────┐
+│                                                                                  │
+│  backend/                                                                        │
+│  ├── macos_manager.py          280 lines    ✅ GOOD                             │
+│  ├── manager.py                114 lines    ✅ GOOD                             │
+│  ├── filesystem.py             111 lines    ❌ BROKEN (4 bugs)                 │
+│  ├── tests/test_fs.py          117 lines    ✅ WELL-WRITTEN                    │
+│  ├── native_filesystem.py      112 lines    🗑️  OBSOLETE                       │
+│  ├── native_shell.py            35 lines    ❓ UNCLEAR                          │
+│  └── test_backend.py            37 lines    ❓ UNCLEAR                          │
+│                                                                                  │
+│  TOTAL: 806 lines (80% working, 14% broken, 6% unclear)                        │
+│                                                                                  │
+└──────────────────────────────────────────────────────────────────────────────────┘
+
+┌─ PHASES AHEAD ──────────────────────────────────────────────────────────────────┐
+│                                                                                  │
+│  Phase 3.4   Docker-compose routing          2 hours   → 180 lines   8 tests   │
+│  Phase 3.5   Orchestrator integration       3 hours   → 215 lines   7 tests   │
+│  Phase 3.6   Integration testing            2.5 hrs   → 170 lines   5+ tests  │
+│  Phase 3.7   Security hardening             3.5 hrs   → 120 lines   ? tests   │
+│  Phase 3.8   Performance optimization       2.5 hrs   → 100 lines   ? tests   │
+│  Phase 4.0   Production ready                 5 hrs   → 150 lines   ? tests   │
+│                                              ─────────────────────────────────  │
+│  TOTAL:                                      ~22 hrs   → 935 lines  40+ tests  │
+│                                                                                  │
+│  Estimated Sessions: 4-5 development sessions                                   │
+│                                                                                  │
+└──────────────────────────────────────────────────────────────────────────────────┘
+
+┌─ NEXT STEPS ────────────────────────────────────────────────────────────────────┐
+│                                                                                  │
+│  IMMEDIATE (10 minutes):                                                         │
+│  1. Open backend/filesystem.py                                                   │
+│  2. Apply 4 bug fixes (see THE 4 BUGS section above)                             │
+│  3. Run: pytest backend/tests/test_fs.py -v                                      │
+│  4. Verify: 13/13 tests PASS                                                     │
+│  5. Commit: git commit -m "Fix filesystem.py critical bugs"                      │
+│                                                                                  │
+│  THEN (2 hours):                                                                 │
+│  6. Read PHASE_ROADMAP.md (detailed spec for Phase 3.4)                          │
+│  7. Implement Phase 3.4 (docker-compose routing)                                 │
+│  8. Run Phase 3.4 tests: 8/8 PASS                                                │
+│  9. Commit and push                                                              │
+│                                                                                  │
+│  FINALLY:                                                                        │
+│  10. Plan next session for Phase 3.5 (orchestrator integration)                  │
+│                                                                                  │
+└──────────────────────────────────────────────────────────────────────────────────┘
+
+┌─ REFERENCE DOCUMENTS ───────────────────────────────────────────────────────────┐
+│                                                                                  │
+│  📄 START_HERE.md                  ← 3-minute executive summary                 │
+│  📄 PROJECT_STATUS_CLEAN.md        ← Detailed unbiased evaluation (15KB)        │
+│  📄 PHASE_ROADMAP.md               ← Complete spec for all phases (31KB)        │
+│  📄 STATUS_VISUAL.txt              ← This file (visual summary)                  │
+│                                                                                  │
+└──────────────────────────────────────────────────────────────────────────────────┘
+
+╔════════════════════════════════════════════════════════════════════════════════╗
+║                                                                                ║
+║  TL;DR: Fix 4 typos in filesystem.py (10 min), tests pass (13/13),            ║
+║         then implement Phase 3.4 (2 hours), then phases 3.5+ come naturally.  ║
+║                                                                                ║
+║  Everything is blocked by these 4 simple typos. Fix them and everything flows.║
+║                                                                                ║
+╚════════════════════════════════════════════════════════════════════════════════╝

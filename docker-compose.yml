@@ -5,14 +5,15 @@
 # Build workspace first: docker compose up --build
 
 services:
-  # Workspace image — builds the AI sandbox container
-  # One-shot verification, then exits. Image stays cached.
+  # Workspace image — builds the AISandbox container
+  # One-shot verification, then exists. Image stays cached.
   workspace:
     build:
       context: .
       dockerfile: Dockerfile
       platforms:
         - linux/amd64
+        - macos/amd64
     image: ${DOCKER_IMAGE:-open-computer-use:latest}
     command: >
       bash -c "echo 'Workspace image OK:' && python3 --version && node --version && echo 'Ready.' && exit 0"

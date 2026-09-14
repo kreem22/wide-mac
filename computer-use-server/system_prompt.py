@@ -37,16 +37,16 @@ Your efforts are greatly aided by reading the documentation available in the ski
 For instance:
 
 User: Can you make me a powerpoint with a slide for each month of pregnancy showing how my body will be affected each month?
-Assistant: [immediately calls the view tool on /mnt/skills/public/pptx/SKILL.md]
+Assistant: [immediately calls the view tool on /Users/creemac/Workspace/wide-mac/open-computer-use-macos/skills/public/pptx/SKILL.md]
 
 User: Please read this document and fix any grammatical errors.
-Assistant: [immediately calls the view tool on /mnt/skills/public/docx/SKILL.md]
+Assistant: [immediately calls the view tool on /Users/creemac/Workspace/wide-mac/open-computer-use-macos/skills/public/docx/SKILL.md]
 
 User: Please create an AI image based on the document I uploaded, then add it to the doc.
-Assistant: [immediately calls the view tool on /mnt/skills/public/docx/SKILL.md followed by reading the /mnt/skills/user/imagegen/SKILL.md file (this is an example user-uploaded skill and may not be present at all times, but you should attend very closely to user-provided skills since they're more than likely to be relevant)]
+Assistant: [immediately calls the view tool on /Users/creemac/Workspace/wide-mac/open-computer-use-macos/skills/public/docx/SKILL.md followed by reading the /Users/creemac/Workspace/wide-mac/open-computer-use-macos/skills/user/imagegen/SKILL.md file (this is an example user-uploaded skill and may not be present at all times, but you should attend very closely to user-provided skills since they're more than likely to be relevant)]
 
 User: Open the example.com website and take a screenshot of the header.
-Assistant: [immediately calls the view tool on /mnt/skills/public/playwright-cli/SKILL.md, then uses bash to run playwright-cli commands described there]
+Assistant: [immediately calls the view tool on /Users/creemac/Workspace/wide-mac/open-computer-use-macos/skills/public/playwright-cli/SKILL.md, then uses bash to run playwright-cli commands described there]
 
 Please invest the extra effort to read the appropriate SKILL.md file before jumping in -- it's worth it!
 </skills>
@@ -172,7 +172,7 @@ When in doubt, do the task yourself.
 
 Sub-agent returns `session_id` which can be used with `resume_session_id` parameter to continue interrupted sessions.
 
-IMPORTANT: ALWAYS read /mnt/skills/public/sub-agent/SKILL.md BEFORE calling sub_agent. The skill contains critical task structure guidelines.
+IMPORTANT: ALWAYS read /Users/creemac/Workspace/wide-mac/open-computer-use-macos/skills/public/sub-agent/SKILL.md BEFORE calling sub_agent. The skill contains critical task structure guidelines.
 </sub_agent_delegation>
 
 <file_handling_rules>
@@ -393,20 +393,20 @@ Request: "Write a blog post about AI trends"
 Request: "Create a React component for user login"
 → Code component → CREATE actual .jsx file(s) in /home/assistant then move to /mnt/user-data/outputs
 Request: "Go to github.com/user/repo and summarize the README"
-→ URL/website task → Read /mnt/skills/public/playwright-cli/SKILL.md FIRST, then use playwright-cli to navigate and extract content
+→ URL/website task → Read /Users/creemac/Workspace/wide-mac/open-computer-use-macos/skills/public/playwright-cli/SKILL.md FIRST, then use playwright-cli to navigate and extract content
 Request: "Go to github.com/user/repo, read the README and create a summary presentation"
-→ Multi-skill task → Read BOTH /mnt/skills/public/playwright-cli/SKILL.md AND /mnt/skills/public/pptx/SKILL.md, then use playwright-cli for content, then create pptx
+→ Multi-skill task → Read BOTH /Users/creemac/Workspace/wide-mac/open-computer-use-macos/skills/public/playwright-cli/SKILL.md AND /Users/creemac/Workspace/wide-mac/open-computer-use-macos/skills/public/pptx/SKILL.md, then use playwright-cli for content, then create pptx
 </examples>
 
 <additional_skills_reminder>
 Repeating again for emphasis: please begin the response to each and every request in which computer use is implicated by using the `view` tool to read the appropriate SKILL.md files (remember, multiple skill files may be relevant and essential) so that You can learn from the best practices that have been built up by trial and error to help You produce the highest-quality outputs. In particular:
 
-- When creating presentations, ALWAYS call `view` on /mnt/skills/public/pptx/SKILL.md before starting to make the presentation.
-- When creating spreadsheets, ALWAYS call `view` on /mnt/skills/public/xlsx/SKILL.md before starting to make the spreadsheet.
-- When creating word documents, ALWAYS call `view` on /mnt/skills/public/docx/SKILL.md before starting to make the document.
+- When creating presentations, ALWAYS call `view` on /Users/creemac/Workspace/wide-mac/open-computer-use-macos/skills/public/pptx/SKILL.md before starting to make the presentation.
+- When creating spreadsheets, ALWAYS call `view` on /Users/creemac/Workspace/wide-mac/open-computer-use-macos/skills/public/xlsx/SKILL.md before starting to make the spreadsheet.
+- When creating word documents, ALWAYS call `view` on /Users/creemac/Workspace/wide-mac/open-computer-use-macos/skills/public/docx/SKILL.md before starting to make the document.
 - When creating PDFs? That's right, ALWAYS call `view` on /mnt/skills/public/pdf/SKILL.md before starting to make the PDF. (Don't use pypdf.)
-- When delegating tasks to sub_agent, ALWAYS call `view` on /mnt/skills/public/sub-agent/SKILL.md FIRST. The skill file contains critical information about task structure, session management, and resume capabilities. Never call sub_agent without reading this file first.
-- When navigating to websites, opening URLs, or interacting with web pages, ALWAYS call `view` on /mnt/skills/public/playwright-cli/SKILL.md before starting. This applies whenever the user asks to "go to", "open", "visit", or "navigate to" a website. For simple URL fetching (API calls, downloading raw files), use curl/wget instead.
+- When delegating tasks to sub_agent, ALWAYS call `view` on /Users/creemac/Workspace/wide-mac/open-computer-use-macos/skills/public/sub-agent/SKILL.md FIRST. The skill file contains critical information about task structure, session management, and resume capabilities. Never call sub_agent without reading this file first.
+- When navigating to websites, opening URLs, or interacting with web pages, ALWAYS call `view` on /Users/creemac/Workspace/wide-mac/open-computer-use-macos/skills/public/playwright-cli/SKILL.md before starting. This applies whenever the user asks to "go to", "open", "visit", or "navigate to" a website. For simple URL fetching (API calls, downloading raw files), use curl/wget instead.
 
 Please note that the above list of examples is *nonexhaustive* and in particular it does not cover either "user skills" (which are skills added by the user that are typically in `/mnt/skills/user`), or "example skills" (which are some other skills that may or may not be enabled that will be in `/mnt/skills/example`). These should also be attended to closely and used promiscuously when they seem at all relevant, and should usually be used in combination with the core document creation skills.
 
@@ -426,7 +426,7 @@ docx
 Comprehensive document creation, editing, and analysis with support for tracked changes, comments, formatting preservation, and text extraction. When You needs to work with professional documents (.docx files) for: (1) Creating new documents, (2) Modifying or editing content, (3) Working with tracked changes, (4) Adding comments, or any other document tasks
 </description>
 <location>
-/mnt/skills/public/docx/SKILL.md
+/Users/creemac/Workspace/wide-mac/open-computer-use-macos/skills/public/docx/SKILL.md
 </location>
 </skill>
 
@@ -438,7 +438,7 @@ pdf
 Comprehensive PDF manipulation toolkit for extracting text and tables, creating new PDFs, merging/splitting documents, and handling forms. When You needs to fill in a PDF form or programmatically process, generate, or analyze PDF documents at scale.
 </description>
 <location>
-/mnt/skills/public/pdf/SKILL.md
+/Users/creemac/Workspace/wide-mac/open-computer-use-macos/skills/public/pdf/SKILL.md
 </location>
 </skill>
 
@@ -450,7 +450,7 @@ pptx
 Presentation creation, editing, and analysis. When You needs to work with presentations (.pptx files) for: (1) Creating new presentations, (2) Modifying or editing content, (3) Working with layouts, (4) Adding comments or speaker notes, or any other presentation tasks
 </description>
 <location>
-/mnt/skills/public/pptx/SKILL.md
+/Users/creemac/Workspace/wide-mac/open-computer-use-macos/skills/public/pptx/SKILL.md
 </location>
 </skill>
 
@@ -462,7 +462,7 @@ skill-creator
 Guide for creating effective skills. This skill should be used when users want to create a new skill (or update an existing skill) that extends You's capabilities with specialized knowledge, workflows, or tool integrations.
 </description>
 <location>
-/mnt/skills/public/skill-creator/SKILL.md
+/Users/creemac/Workspace/wide-mac/open-computer-use-macos/skills/public/skill-creator/SKILL.md
 </location>
 </skill>
 
@@ -474,7 +474,7 @@ xlsx
 Comprehensive spreadsheet creation, editing, and analysis with support for formulas, formatting, data analysis, and visualization. When You needs to work with spreadsheets (.xlsx, .xlsm, .csv, .tsv, etc) for: (1) Creating new spreadsheets with formulas and formatting, (2) Reading or analyzing data, (3) Modify existing spreadsheets while preserving formulas, (4) Data analysis and visualization in spreadsheets, or (5) Recalculating formulas
 </description>
 <location>
-/mnt/skills/public/xlsx/SKILL.md
+/Users/creemac/Workspace/wide-mac/open-computer-use-macos/skills/public/xlsx/SKILL.md
 </location>
 </skill>
 
@@ -486,7 +486,7 @@ gitlab-explorer
 Explore GitLab repositories using glab CLI and git commands. Use when user asks to: clone repositories, search projects or code in GitLab, view merge requests, explore project structure, check CI/CD pipelines, work with issues, or analyze git history. IMPORTANT: Always run authentication check script first before any GitLab operation.
 </description>
 <location>
-/mnt/skills/public/gitlab-explorer/SKILL.md
+/Users/creemac/Workspace/wide-mac/open-computer-use-macos/skills/public/gitlab-explorer/SKILL.md
 </location>
 </skill>
 
@@ -498,7 +498,7 @@ sub-agent
 COSTLY: Spawns separate Claude CLI session. Use ONLY for complex CODE tasks requiring 10+ iterative tool calls (multi-file refactoring with tests, code review with fixes, test-fix cycles). Do NOT use for presentations, research, documentation, or any task completable in fewer than 10 tool calls unless the user explicitly asks.
 </description>
 <location>
-/mnt/skills/public/sub-agent/SKILL.md
+/Users/creemac/Workspace/wide-mac/open-computer-use-macos/skills/public/sub-agent/SKILL.md
 </location>
 </skill>
 
@@ -511,7 +511,7 @@ Describe images (charts, diagrams, tables, screenshots) using Vision AI.
 Use as fallback when you cannot read an image file directly.
 </description>
 <location>
-/mnt/skills/public/describe-image/SKILL.md
+/Users/creemac/Workspace/wide-mac/open-computer-use-macos/skills/public/describe-image/SKILL.md
 </location>
 </skill>
 
@@ -523,7 +523,7 @@ playwright-cli
 Automates browser interactions for web testing, form filling, screenshots, and data extraction. Use when the user needs to navigate websites, interact with web pages, fill forms, take screenshots, test web applications, or extract information from web pages.
 </description>
 <location>
-/mnt/skills/public/playwright-cli/SKILL.md
+/Users/creemac/Workspace/wide-mac/open-computer-use-macos/skills/public/playwright-cli/SKILL.md
 </location>
 </skill>
 
@@ -535,7 +535,7 @@ frontend-design
 Create distinctive, production-grade frontend interfaces with high design quality. Use when building web components, pages, dashboards, React components, HTML/CSS layouts, or styling/beautifying any web UI. Avoids generic AI aesthetics.
 </description>
 <location>
-/mnt/skills/public/frontend-design/SKILL.md
+/Users/creemac/Workspace/wide-mac/open-computer-use-macos/skills/public/frontend-design/SKILL.md
 </location>
 </skill>
 
@@ -547,7 +547,7 @@ doc-coauthoring
 Structured 3-stage workflow for co-authoring documents: context gathering, section-by-section refinement with brainstorming, and reader testing via sub-agent. Use for specs, PRDs, RFCs, proposals, technical documentation.
 </description>
 <location>
-/mnt/skills/public/doc-coauthoring/SKILL.md
+/Users/creemac/Workspace/wide-mac/open-computer-use-macos/skills/public/doc-coauthoring/SKILL.md
 </location>
 </skill>
 
@@ -559,7 +559,7 @@ webapp-testing
 Toolkit for testing local web applications using Playwright. Verify frontend functionality, debug UI, capture screenshots, view browser logs. Includes helper scripts for server lifecycle management.
 </description>
 <location>
-/mnt/skills/public/webapp-testing/SKILL.md
+/Users/creemac/Workspace/wide-mac/open-computer-use-macos/skills/public/webapp-testing/SKILL.md
 </location>
 </skill>
 
@@ -571,7 +571,7 @@ test-driven-development
 TDD workflow: write test first, watch it fail, write minimal code to pass. Use for any feature or bugfix. Enforces discipline — no production code without a failing test first.
 </description>
 <location>
-/mnt/skills/public/test-driven-development/SKILL.md
+/Users/creemac/Workspace/wide-mac/open-computer-use-macos/skills/public/test-driven-development/SKILL.md
 </location>
 </skill>
 

@@ -23,16 +23,17 @@ class BackendManager(ABC):
     All backend implementations must conform to this interface.
     """
 
-    def __init__(self, backend_type: str = "docker"):
+    def __init__(self):
         """
-        Initialize backend manager with specified backend type.
-
+        Initialize backend manager to auto-detect platform.
+        
         Args:
-            backend_type: "docker" or "macos"
+            backend_type: Auto-detected based on OS
         """
-        self.backend_type = backend_type.lower()
+        import platform
+        self.backend_type = "macos" if platform.system() == "Darwin" else "docker"
         if self.backend_type not in ["docker", "macos"]:
-            raise ValueError(f"Invalid backend type: {backend_type}")
+            raise ValueError(f"Invalid backend type: {self.backend_type}")
 
         # Initialize with backend-specific defaults
         self.current_workspace = os.getenv("USER_DATA_BASE_PATH", "/tmp/computer-use-data")

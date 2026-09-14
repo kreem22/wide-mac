@@ -1,9 +1,9 @@
 # SPDX-License-Identifier: FSL-1.1-Apache-2.0
 # Copyright (c) 2025 Open Computer Use Contributors
 #
-# Integration test stack. Mirrors docker-compose.yml exactly — same socket
-# bind, same workspace image, same env shape — but on a non-default port and
-# with a fixed MCP_API_KEY so the pytest suite can assert auth behavior.
+  # Integration test stack. Mirrors macOS docker-compose.yml exactly — same socket
+  # bind, same workspace image with macOS support, same env shape — but on
+  # a non-default port and with a fixed MCP_API_KEY so pytest suite can assert auth behavior.
 #
 # Run:
 #   docker compose -f docker-compose.test.yml up -d --build
