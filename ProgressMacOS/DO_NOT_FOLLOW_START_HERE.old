@@ -82,29 +82,15 @@ Do not assume, infer, or self-declare that a phase is unlocked based only on imp
 
 ## Phases Ahead
 
-If `ProgressMacOS/PROGRESS_PHASES_HIGHLIGHTS.md` file exists then read it. Thats your Phases Ahead. If the file does not exist follow section **Phases Generation**
-
----
-
-## Phases Generation
-
-Ignore this section if `ProgressMacOS/PROGRESS_PHASES_HIGHLIGHTS.md` file exists.
-
-
-Based on the current project situation, persisted progress, overall goal,
-and applicable roadmap/unlock criteria, based on your best judgement, generate the next forward phases using a progression increment of **10%** and expose **3 forward priorities**.
-
-Generate and retain the resulting phases in the current context using:
-
-| Priority | Phase | Status |
-|----------|-------|--------|
-| **P1 — Current** | **<Phase Number>** | <Status> |
-| **P2 — Upcoming** | **<Phase Number>** | <Status> |
-| **P3 — Future** | **<Phase Number>** | <Status> |
-
-Only **P1 — Current** is actionable.
-
-Once the phases are generated. save them in a file ProgressMacOS/PROGRESS_PHASES_HIGHLIGHTS.md
+| Phase | What | Status |
+|-------|------|--------|
+| **3** | Fix bugs and test |
+| **3.4** | Docker-compose routing | Blocked |
+| **3.5** | Orchestrator integration | Blocked |
+| **3.6** | Integration tests | Blocked |
+| **3.7** | Security hardening | Blocked |
+| **3.8** | Performance tuning | Blocked |
+| **4.0** | Production ready | Blocked |
 
 ---
 
@@ -127,7 +113,9 @@ After completing all phases, you'll have:
 For your reference, below documents are right under ProgressMacOS/
  
 - **PROJECT_STATUS_CLEAN.md** — Unbiased evaluation of current state
-- **PHASE_ROADMAP_<latest version>.md** — Detailed phase-by-phase implementation spec
+- **PHASE_ROADMAP.md** — Detailed phase-by-phase implementation spec
+- **backend/tests/test_fs.py** — Well-written unit tests (run these)
+- **backend/macos_manager.py** — Backend implementation (solid)
 
 ---
 
