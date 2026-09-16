@@ -53,6 +53,8 @@ Call `ProgressMacOS/GetProgressTemplate.py` and read the returned progress templ
 
 The template defines the required structure, format, and content boundaries for persisted progress.
 
+Additionally, to cross check upon completion of each phase please also refer to - **PHASE_ROADMAP_<latest version>.md** — Detailed phase-by-phase implementation spec and create a **PHASE_ROADMAP_<current_date>_<current_time>.md** with the updated status. Keep the format similar to its previous version.
+
 ---
 
 ## Operating Rule
@@ -75,6 +77,8 @@ Before ending a context, persist meaningful progress by sending the new progress
 Do not advance to a subsequent phase unless the current phase's defined completion or unlock criteria have been satisfied and verified.
 
 A phase marked **Blocked** remains blocked until its defined unlock criteria have been successfully verified.
+
+You may refer to **PHASE_ROADMAP_<latest version>.md** — for a Detailed phase-by-phase implementation spec which will assist you in development
 
 Do not assume, infer, or self-declare that a phase is unlocked based only on implementation progress or apparent completion.
 
